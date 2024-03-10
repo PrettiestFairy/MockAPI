@@ -49,7 +49,24 @@ class TbTest1Serializer(serializers.Serializer):
 
     # 数据更新
     def update(self, instance: TbTest1, validated_data: OrderedDict) -> TbTest1:
+        # for _key, _value in validated_data:
+        #     setattr(instance, _key, _value)
         instance.name = validated_data.get("name", instance.name)
         instance.age = validated_data.get("age", instance.age)
         instance.save()
         return instance
+
+
+class TbTest1ModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        # 模型类
+        model = TbTest1
+        # 字段列表
+        fields = ["name", "age"]
+        # 只读字段
+        # read_only_fields = ("id",)
+        # 额外关键字参数
+        # extra_kwargs = {
+        #     "name": {"validators": (CheckData.check_name,)},
+        #     "age": {"min_value": 0, "max_value": 100}
+        # }

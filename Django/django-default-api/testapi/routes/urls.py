@@ -17,6 +17,6 @@ routes = DefaultRouter()
 
 urlpatterns = list()
 urlpatterns.extend(routes.urls)
-urlpatterns.append(re_path(r"d-test/", TbTestApi.as_view()))
+urlpatterns.append(re_path(r"dtest/", TbTestApi.as_view()))
 
 for i in urlpatterns: print(i)

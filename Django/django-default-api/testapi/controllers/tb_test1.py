@@ -17,6 +17,7 @@ from django.http.response import JsonResponse
 
 from testapi.models.tb_test1 import TbTest1
 from testapi.serializers.tb_test1 import TbTest1Serializer
+from testapi.serializers.tb_test1 import TbTest1ModelSerializer
 from testapi.constants.api import Api, DefaultHTTPStatusCode
 from testapi.constants.simulation import ClientData
 
@@ -58,18 +59,24 @@ class TbTestApi(View):
     #     return JsonResponse(data=__results, status=__results.get("status"))
 
     # 序列化 - 更新数据
-    def get(self, request: HttpRequest) -> HttpResponse:
-        __results = Api.get_default_results()
-        # 获取数据
-        try:
-            tb_test1_data = TbTest1.objects.get(pk=2)
-        except TbTest1.DoesNotExist:
-            __results.update({"status": "400"})
-            return JsonResponse(data=__results, status=DefaultHTTPStatusCode.BadRequest)
+    # def get(self, request: HttpRequest) -> HttpResponse:
+    #     __results = Api.get_default_results()
+    #     # 获取数据
+    #     try:
+    #         tb_test1_data = TbTest1.objects.get(pk=2)
+    #     except TbTest1.DoesNotExist:
+    #         __results.update({"status": "400"})
+    #         return JsonResponse(data=__results, status=DefaultHTTPStatusCode.BadRequest)
+    # 
+    #     __data = ClientData.get_test_api()
+    #     serializer = TbTest1Serializer(instance=tb_test1_data, data=__data)
+    #     serializer.is_valid()
+    #     serializer.save()
+    #     __results.update({"status": 200, "message": "Success", "data": serializer.data})
+    #     return JsonResponse(data=__results, status=__results.get("status"))
 
-        __data = ClientData.get_test_api()
-        serializer = TbTest1Serializer(instance=tb_test1_data, data=__data)
-        serializer.is_valid()
-        serializer.save()
-        __results.update({"status": 200, "message": "Success", "data": serializer.data})
-        return JsonResponse(data=__results, status=__results.get("status"))
+    def get(self, request: HttpRequest) -> HttpResponse:
+        results = Api.get_default_results()
+        serializer = TbTest1ModelSerializer(TbTest1.objects.first())
+        results.update({"status": 200, "message": "Success", "data": serializer.data})
+        return JsonResponse(data=results, status=results.get("status"))
