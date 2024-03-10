@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
-    
+
     "testapi",
 ]
 
@@ -75,18 +75,9 @@ WSGI_APPLICATION = "default.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "HOST": "mapping.fairy.host",
-        "PORT": 51001,
-        "USER": "austin",
-        "PASSWORD": "Austin.pwd:112#.",
-        "NAME": "fairyland_django_default"
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 

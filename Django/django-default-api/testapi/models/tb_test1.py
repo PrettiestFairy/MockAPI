@@ -25,3 +25,4 @@ class TbTest1(models.Model):
 
     class Meta:
         db_table = 'tb_test1'
+        verbose_name = "测试表1"
